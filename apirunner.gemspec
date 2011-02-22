@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{apirunner}
-  s.version = "0.5.0"
+  s.version = "0.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["jan@moviepilot.com"]
-  s.date = %q{2010-11-02}
+  s.date = %q{2011-02-22}
   s.description = %q{apirunner is a testsuite to query your RESTful JSON API and match response with your defined expectations}
   s.email = %q{developers@moviepilot.com}
   s.extra_rdoc_files = [
@@ -36,13 +36,19 @@ Gem::Specification.new do |s|
     "examples/test/api_runner/006_recommendations.yml",
     "examples/test/api_runner/007_item_predictions.yml",
     "examples/test/api_runner/008_discovery.yml",
-    "examples/test/api_runner/009_cacheable_operations.yml",
     "examples/test/api_runner/010_fsk.yml",
     "examples/test/api_runner/011_misc.yml",
-    "examples/test/api_runner/012_telekom_error_reports.yml",
-    "examples/test/api_runner/013-extended-unpersonalized-discovery.yml",
-    "examples/test/api_runner/014-extended-personalized-discovery.yml",
-    "examples/test/api_runner/015_create_10000_users.yml",
+    "examples/test/api_runner/012_telekom_performance_tests.yml",
+    "examples/test/api_runner/013_telekom_test_data_expectation.yml",
+    "examples/test/api_runner/014-extended-unpersonalized-discovery.yml",
+    "examples/test/api_runner/015-extended-personalized-discovery.yml",
+    "examples/test/api_runner/016_create_10000_users.yml",
+    "examples/test/api_runner/100_basic_varnish_tests.yml",
+    "examples/test/api_runner/101_user_cache_update_and_delete_tests.yml",
+    "examples/test/api_runner/102_user_cache_recommendations.yml",
+    "examples/test/api_runner/103_user_chache_predictions.yml",
+    "examples/test/api_runner/104_user_cache_discovery.yml",
+    "examples/test/api_runner/105_test_discovery_caching.yml",
     "examples/test/api_runner/999_delete_user.yml",
     "examples/test/api_runner/excludes.yml",
     "features/apirunner.feature",
