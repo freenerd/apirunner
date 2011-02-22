@@ -43,7 +43,13 @@ apirunner was initially developed for testing of the mighty (m8ty) i18n recommen
 
 == Installation
 
+Rails3:
+
   gem install apirunner
+
+Rails2:
+
+  script/plugin install git://github.com/janroesner/apirunner.git
 
 == Prerequisites
 
