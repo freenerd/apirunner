@@ -1,7 +1,14 @@
+if defined?(Rails) and Rails.version.match(/^2.+$/)
+  APIRUNNER_ROOT = File.dirname(__FILE__).to_s + "/../../"
+  TEST_EXAMPLES_PATH = APIRUNNER_ROOT + "examples/test/api_runner"
+  CONFIG_EXAMPLE_PATH = APIRUNNER_ROOT + "examples/config"
+end
+
 begin
   config = YAML.load_file("#{Rails.root}/config/api_runner.yml")
 rescue
 end
+
 namespace :api do
   namespace :run do
     config.delete_if{ |key| key == "general" }.each_key do |env|
