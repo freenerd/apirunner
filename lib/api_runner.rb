@@ -1,6 +1,6 @@
 class ApiRunner
   require 'yaml'
-  require 'csv_writer'
+  require 'csv_writer' if defined?(Rails) and Rails.version.match(/^3.+$/)
   require 'string_ext' if not String.respond_to?(:underscore)
   require 'expectation_matcher'
   require 'http_client'
@@ -24,14 +24,14 @@ class ApiRunner
     load_url_spec
     @http_client = HttpClient.new(@configuration.protocol, @configuration.host, @configuration.port, @configuration.namespace)
     @expectation = ExpectationMatcher.new(@excludes)
-    @csv_writer = CsvWriter.new(self.class.csv_path, env)
+    @csv_writer = CsvWriter.new(self.class.csv_path, env) if defined?(Rails) and Rails.version.match(/^3.+$/)
   end
 
   # checks servers availability and invokes test cases
   def run
     if server_is_available?
       run_tests
-      @csv_writer.write(@configuration.csv_mode, @results) unless @results.empty?
+      @csv_writer.write(@configuration.csv_mode, @results) unless @results.empty? if defined?(Rails) and Rails.version.match(/^3.+$/)
       @results.each_with_index do |result, index|
         result.honk_in(@configuration.verbosity, index)
       end unless @results.empty?
