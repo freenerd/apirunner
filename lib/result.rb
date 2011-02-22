@@ -10,7 +10,8 @@ class Result
   end
 
   # honk out the errors message corresponding to the verbosity configuration the user took
-  def honk_in(verbosity="rspec", index)
+  def honk_in(verbosity, index)
+    verbosity ||= "rspec"
     self.send(verbosity.to_sym, index)
   end
 
