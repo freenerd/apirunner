@@ -182,13 +182,31 @@ Every option that is not realted to a certain environment has to be mentioned in
       - verbose_on_success
       - rspec
       - performance
-      - verbose_with_curl
 
 *verbose_on_error* - prints out detailed testcase information in case of an error
 *verbose_on_sccess* - prints out detailed testcase information for every testcase, even if there was no error at all
 *rspec* - you will see only dots and F's as you know it from rspec tests
 *performance* - prints out a stripped down performance report for every testcase that was run
-*verbose_with_curl* - prints out a detailed report for every testcase including an equivalent curl commandline call
+
+== Executing only selected test cases
+It is possible to only execute several selected tests of a test suite by setting the environment variable to a list of regular expression that are matched against the file names of tests.
+
+  ONLY=001,011,update rake api:run:production
+
+would run all test files in
+
+  test/apirunner/*
+
+whose file name would match the regular expression:
+
+  /(001|011|update)/
+
+== Curl Output
+When trying to debug errors, it can be very useful to replay a test step by step. If you run apirunner with
+
+  VERBOSE=1
+
+the output will contain equivalent curl commands for every test.
 
 == Priority
 
@@ -340,6 +358,20 @@ In the request section you define everthing that is needed to generate you HTTP(
 *headers*
 
 In the headers section you can declare every header as a key value pair, the value should be a string and such quoted with " or '. If you query a Rails application you should not forget the Content-Type: 'application/json' and you could also mention Accept: 'application/json' as well as any other header key that may be important for your application to query.
+
+Cache-Control headers are accessible through a hash, when you need to test a value of s-maxage from the Cache-Control header:
+
+Cache-Control:public, s-maxage=86400
+
+you can test for it with:
+
+   Cache-Control[s-maxage]: @in one day   # test that s-maxage from Cache-Controll is set to now + one day
+
+Time-test in Caching-Headers can be done with relative time values that can be understood by https://github.com/mojombo/chronic. Testing includes a tolerance of +/- 5 seconds, as the test runs on a real system and you will have some latency. Other possible values are would be
+
+  @tomorrow 4:00am
+  @next_occurence_of 3:00am
+  @in 5 hours
 
 *path*
 
